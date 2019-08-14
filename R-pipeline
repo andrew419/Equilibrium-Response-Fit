@@ -1,1 +1,8 @@
-library()
+library(readr)
+library(dplyr)
+
+### read in data and select relevant variables
+report_points <- read_csv(<FILENAME.csv>)
+
+resp <- select(report_points, ROI, ligand, analyte, molarity,
+  baseline_RU, equil_RU)
