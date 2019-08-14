@@ -1,8 +1,19 @@
 library(readr)
 library(dplyr)
 
-### read in data and select relevant variables
+### read in data and select relevant variables ###
+
 report_points <- read_csv(<FILENAME.csv>)
 
 resp <- select(report_points, ROI, ligand, analyte, molarity,
   baseline_RU, equil_RU)
+
+### downselect data ###
+
+# Results will often include injections that are not useable due to,
+# for example, an air bubble in the flow cell. These would normally be
+# excluded, but the report points feature of KIT re-introduces them and
+# necessitates their removal
+
+drop_table <- c(<INJECTIONS>)
+resp <- filter(resp, !analyte %in% drop_table)
